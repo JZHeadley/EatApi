@@ -1,0 +1,14 @@
+.gradle
+.mtj.tmp/
+.idea
+build
+out
+
+# Package Files #
+*.ear
+hs_err_pid*
+
+/gradle/wrapper/gradle-wrapper.jar
+/gradlew
+/gradle/wrapper/gradle-wrapper.properties
+/gradlew.bat
