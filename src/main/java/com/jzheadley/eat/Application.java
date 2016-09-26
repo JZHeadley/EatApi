@@ -33,20 +33,24 @@ public class Application implements CommandLineRunner {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-    @Autowired
-    private MenuItemRepository menuItemRepository;
+    private final MenuItemRepository menuItemRepository;
 
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
-    @Autowired
-    private MenuRepository menuRepository;
+    private final MenuRepository menuRepository;
 
-    @Autowired
-    private RestaurantRepository restaurantRepository;
+    private final RestaurantRepository restaurantRepository;
 
     private Menu toqueLunchMenu = new Menu("Toque Lunch Menu");
     private Menu toqueDinnerMenu = new Menu("Toque Dinner Menu");
+
+    @Autowired
+    public Application(MenuItemRepository menuItemRepository, RestaurantRepository restaurantRepository, CategoryRepository categoryRepository, MenuRepository menuRepository) {
+        this.menuItemRepository = menuItemRepository;
+        this.restaurantRepository = restaurantRepository;
+        this.categoryRepository = categoryRepository;
+        this.menuRepository = menuRepository;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

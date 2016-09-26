@@ -1,8 +1,8 @@
 package com.jzheadley.eat.Respositories;
 
 import com.jzheadley.eat.Models.Category;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface CategoryRepository extends JpaRepository<Category, Integer> {
+public interface CategoryRepository extends CrudRepository<Category, Integer> {
 
 }
