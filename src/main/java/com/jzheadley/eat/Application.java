@@ -64,7 +64,7 @@ public class Application implements CommandLineRunner {
         Collection<Menu> menus = new ArrayList<Menu>();
         menus.add(toqueLunchMenu);
         menus.add(toqueDinnerMenu);
-        Restaurant laToque = new Restaurant("La Toque", "Quebec");
+        Restaurant laToque = new Restaurant("La Toque", "Quebec", "https://aviewfromdifferentheights.files.wordpress.com/2013/07/toque.jpg");
         laToque.setMenus(menus);
         restaurantRepository.save(laToque);
         for (MenuItem menuItem : menuItemRepository.findAll()) {

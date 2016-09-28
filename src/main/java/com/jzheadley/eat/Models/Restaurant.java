@@ -16,8 +16,12 @@ public class Restaurant implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "pictureurl")
+    private String pictureurl;
+
     @Column(name = "location")
     private String location;
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "restaurantmenus",
             joinColumns = @JoinColumn(name = "idrestaurant", referencedColumnName = "id"),
@@ -30,9 +34,10 @@ public class Restaurant implements Serializable {
         this.menus = menus;
     }
 
-    public Restaurant(String name, String location) {
+    public Restaurant(String name, String location, String pictureurl) {
         this.name = name;
         this.location = location;
+        this.pictureurl = pictureurl;
     }
 
     public Restaurant() {
@@ -64,5 +69,13 @@ public class Restaurant implements Serializable {
 
     public void setMenus(Collection<Menu> menus) {
         this.menus = menus;
+    }
+
+    public String getPictureurl() {
+        return pictureurl;
+    }
+
+    public void setPictureurl(String pictureurl) {
+        this.pictureurl = pictureurl;
     }
 }
