@@ -1,13 +1,7 @@
 package com.jzheadley.eat;
 
-import com.jzheadley.eat.Models.Category;
-import com.jzheadley.eat.Models.Menu;
-import com.jzheadley.eat.Models.MenuItem;
-import com.jzheadley.eat.Models.Restaurant;
-import com.jzheadley.eat.Respositories.CategoryRepository;
-import com.jzheadley.eat.Respositories.MenuItemRepository;
-import com.jzheadley.eat.Respositories.MenuRepository;
-import com.jzheadley.eat.Respositories.RestaurantRepository;
+import com.jzheadley.eat.Models.*;
+import com.jzheadley.eat.Respositories.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,24 +27,23 @@ public class Application implements CommandLineRunner {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-    private final MenuItemRepository menuItemRepository;
+    @Autowired
+    private MenuItemRepository menuItemRepository;
 
-    private final CategoryRepository categoryRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
-    private final MenuRepository menuRepository;
+    @Autowired
+    private MenuRepository menuRepository;
 
-    private final RestaurantRepository restaurantRepository;
+    @Autowired
+    private RestaurantRepository restaurantRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     private Menu toqueLunchMenu = new Menu("Toque Lunch Menu");
     private Menu toqueDinnerMenu = new Menu("Toque Dinner Menu");
-
-    @Autowired
-    public Application(MenuItemRepository menuItemRepository, RestaurantRepository restaurantRepository, CategoryRepository categoryRepository, MenuRepository menuRepository) {
-        this.menuItemRepository = menuItemRepository;
-        this.restaurantRepository = restaurantRepository;
-        this.categoryRepository = categoryRepository;
-        this.menuRepository = menuRepository;
-    }
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -61,18 +54,38 @@ public class Application implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         initMenu1Data();
         initMenu2Data();
+
+        User jzheadley = new User("jzheadley", "r0dkcDGljlhTEsem1bELOx6NZT12");
+        User headleyjz = new User("headleyjz", "VyT8kfduPWfTT0uq00zMiFKyJWq2");
         Collection<Menu> menus = new ArrayList<Menu>();
         menus.add(toqueLunchMenu);
         menus.add(toqueDinnerMenu);
-        Restaurant laToque = new Restaurant("La Toque", "Quebec", "https://aviewfromdifferentheights.files.wordpress.com/2013/07/toque.jpg");
+        Restaurant laToque = new Restaurant("La Toque", "Some Description of the restaurant", " 94559", "1314 McKinstry St.", "Napa", "Ca", "http://latoque.com/wp-content/uploads/2015/10/Night-Patio-resized-e1455670947299.jpg", 1);
         laToque.setMenus(menus);
         restaurantRepository.save(laToque);
+        restaurantRepository.save(new Restaurant("Alero Mexican Restaurant", "description", "23220", "417 w grace st", "Richmond", "United States", "https://static1.squarespace.com/static/52f3de89e4b0ad0ada6fe955/t/54daf5c8e4b0f48761189fcd/1423636252957/?format=1000w", 1));
+        restaurantRepository.save(new Restaurant("restaurantName", "description", "testZip", "address of the restaurant", "city name", "country of restaurant", "http://lorempixel.com/output/city-q-c-1024-1024-7.jpg", 2));
+        restaurantRepository.save(new Restaurant("restaurantName", "description", "testZip", "address of the restaurant", "city name", "country of restaurant", "http://lorempixel.com/output/city-q-c-1024-1024-7.jpg", 1));
+        restaurantRepository.save(new Restaurant("restaurantName", "description", "testZip", "address of the restaurant", "city name", "country of restaurant", "http://lorempixel.com/output/city-q-c-1024-1024-7.jpg", 2));
+        restaurantRepository.save(new Restaurant("restaurantName", "description", "testZip", "address of the restaurant", "city name", "country of restaurant", "http://lorempixel.com/output/city-q-c-1024-1024-7.jpg", 1));
+        restaurantRepository.save(new Restaurant("restaurantName", "description", "testZip", "address of the restaurant", "city name", "country of restaurant", "http://lorempixel.com/output/city-q-c-1024-1024-7.jpg", 1));
+        restaurantRepository.save(new Restaurant("restaurantName", "description", "testZip", "address of the restaurant", "city name", "country of restaurant", "http://lorempixel.com/output/city-q-c-1024-1024-7.jpg", 2));
+        restaurantRepository.save(new Restaurant("restaurantName", "description", "testZip", "address of the restaurant", "city name", "country of restaurant", "http://lorempixel.com/output/city-q-c-1024-1024-7.jpg", 1));
+        restaurantRepository.save(new Restaurant("restaurantName", "description", "testZip", "address of the restaurant", "city name", "country of restaurant", "http://lorempixel.com/output/city-q-c-1024-1024-7.jpg", 2));
+
+        userRepository.save(jzheadley);
+        userRepository.save(headleyjz);
+
         for (MenuItem menuItem : menuItemRepository.findAll()) {
             logger.info(menuItem.toString());
         }
         for (Category category : categoryRepository.findAll()) {
             logger.info(category.toString());
         }
+
+
+        logger.info("\n\n\n");
+//        logger.info(userRepository.findByFirebaseId("VyT8kfduPWfTT0uq00zMiFKyJWq2").toString());
     }
 
     private void initMenu2Data() {
